@@ -1,0 +1,16 @@
+{
+  "main": {
+    "discussion_": "Diskusjon",
+    "graphs_": "Grafer",
+    "statistics_": "Statistikk",
+    "county_": "Fylke",
+    "infected_": "Smittede",
+    "dead_": "Døde",
+    "recovered_": "Friske",
+    "post_": "SE HVA ANDRE SIER OM VIRUSET",
+    "posted_": "Publisert",
+    "newPost_": "Nytt Innlegg",
+    "publicize_": "Publiser",
+    "norway_": "Norge"
+  }
+}

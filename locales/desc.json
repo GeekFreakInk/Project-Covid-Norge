@@ -1,0 +1,16 @@
+{
+  "main": {
+    "discussion_": "Discussion",
+    "graphs_": "Graphs",
+    "statistics_": "Statistics",
+    "county_": "County",
+    "infected_": "Infected",
+    "dead_": "Dead",
+    "recovered_": "Recovered",
+    "post_": "Post",
+    "posted_": "Posted",
+    "newPost_": "New Post",
+    "publicize_": "Publicize",
+    "norway_": "Norway"
+  }
+}
