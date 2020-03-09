@@ -1,16 +1,16 @@
 {
-  "main": {
-    "discussion_": "讨论",
-    "graphs_": "图表",
-    "statistics_": "统计",
-    "county_": "县",
-    "infected_": "感染",
-    "dead_": "死了",
-    "recovered_": "已恢复",
-    "post_": "大家对病毒谈论些什么",
-    "posted_": "发布了",
-    "newPost_": "新信息",
-    "publicize_": "发布",
-    "norway_": "挪威"
-  }
+	"main": {
+		"discussion_": "讨论",
+		"graphs_": "图表",
+		"statistics_": "数据",
+		"county_": "县",
+		"infected_": "确诊",
+		"dead_": "死亡",
+		"recovered_": "已恢复",
+		"post_": "大家对病毒谈论些什么",
+		"posted_": "发布了",
+		"newPost_": "新信息",
+		"publicize_": "发布",
+		"norway_": "挪威"
+	}
 }
