@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class _AcademicLevelState extends State<AcademicLevel>{
+class _AcademicLevelState extends State<AcademicLevel> {
   Item selectedLanguage;
   String setLanguage;
   bool result;
   List<Item> levels = <Item>[
-    const Item('Norsk',Icon(Icons.school, color:  const Color(0xFF167F67),)),
-    const Item('Engelsk',Icon(Icons.school, color:  const Color(0xFF167F67),)),
-    const Item('Kinesisk',Icon(Icons.school, color:  const Color(0xFF167F67),)),
+    const Item(
+        'Norsk',
+        Icon(
+          Icons.school,
+          color: const Color(0xFF167F67),
+        )),
+    const Item(
+        'Engelsk',
+        Icon(
+          Icons.school,
+          color: const Color(0xFF167F67),
+        )),
+    const Item(
+        'kinesisk',
+        Icon(
+          Icons.school,
+          color: const Color(0xFF167F67),
+        )),
   ];
 
   @override
@@ -16,57 +31,62 @@ class _AcademicLevelState extends State<AcademicLevel>{
     super.initState();
     fetchLanguagePrefrences();
   }
+
   @override
   Widget build(BuildContext context) {
-      if(result != null){
-        switch (setLanguage){
-          case 'Norsk':
+    if (result != null) {
+      switch (setLanguage) {
+        case 'Norsk':
           {
-          selectedLanguage =levels[0];
+            selectedLanguage = levels[0];
           }
           break;
-          case "Engelsk":
+        case "Engelsk":
           {
-            selectedLanguage =levels[1];
+            selectedLanguage = levels[1];
           }
           break;
-          case "Kinesisk":
+        case "Kinesisk":
           {
-            selectedLanguage =levels[2];
+            selectedLanguage = levels[2];
           }
           break;
-        }
-      
-        return DropdownButton<Item>(
-        hint: Text("Velg språk"),
-        value: selectedLanguage,
-        onChanged: (Item value){
-          setState(() {
-            selectedLanguage = value;
-          });
-          _updateValue("preferedLanguage",value.language);
-        },
-        items: levels.map((Item level){
-          return DropdownMenuItem<Item>(
-            value: level,
-            child: Row(
-              children: <Widget>[
-                level.icon,
-                SizedBox(width: 10,),
-                Text(level.language, style: TextStyle(color: Colors.black),),
-              ],
-            ),
-          );
-        }
-      ).toList());
-    }else{
+      }
+
+      return DropdownButton<Item>(
+          hint: Text("Velg språk"),
+          value: selectedLanguage,
+          onChanged: (Item value) {
+            setState(() {
+              selectedLanguage = value;
+            });
+            _updateValue("preferedLanguage", value.language);
+          },
+          items: levels.map((Item level) {
+            return DropdownMenuItem<Item>(
+              value: level,
+              child: Row(
+                children: <Widget>[
+                  level.icon,
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    level.language,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
+            );
+          }).toList());
+    } else {
       return DropdownButton<Item>(
         hint: Text("Velg språk"),
-        value: selectedLanguage, onChanged: (Item value) {},
+        value: selectedLanguage,
+        onChanged: (Item value) {},
       );
     }
   }
-   
 
   Future<void> _updateValue(String prefString, String setting) async {
     final prefs = await SharedPreferences.getInstance();
@@ -74,30 +94,27 @@ class _AcademicLevelState extends State<AcademicLevel>{
     await fetchLanguagePrefrences();
   }
 
-
-  Future<void> fetchLanguagePrefrences() async{
+  Future<void> fetchLanguagePrefrences() async {
     final prefs = await SharedPreferences.getInstance();
-  
+
     String _preferedLanguage = prefs.getString('preferedLanguage');
-  _preferedLanguage == null ? await prefs.setString('preferedLanguage', "Norsk") : _preferedLanguage;
+    _preferedLanguage == null
+        ? await prefs.setString('preferedLanguage', "Norsk")
+        : _preferedLanguage;
 
     setState(() {
       setLanguage = _preferedLanguage;
       result = true;
     });
-    
   }
 }
 
-
-
-
-class AcademicLevel extends StatefulWidget{
+class AcademicLevel extends StatefulWidget {
   @override
   _AcademicLevelState createState() => new _AcademicLevelState();
 }
 
-class Item{
+class Item {
   const Item(this.language, this.icon);
   final String language;
   final Icon icon;
