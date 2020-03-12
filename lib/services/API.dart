@@ -4,14 +4,25 @@ import 'package:Covid_Norge/shared/config.dart';
 import 'package:intl/intl.dart';
 import "package:http/http.dart" as http;
 
-Future<List> getAreaData() async {
-  var areaListJSON = await http.get("http://10.0.2.2:5000/api/areas");
-  return json.decode(areaListJSON.body);
+getAreaData() async {
+  var areaListJSON;
+  try{
+   areaListJSON = await http.get(properties['Api']['BaseUrl']+"/areas");
+    return json.decode(areaListJSON.body);
+  }catch(e){
+    return -1;
+  }
 }
 
-Future<List> fetchPosts() async {
-  var postList = await http.get("http://10.0.2.2:5000/api/posts");
-  return json.decode(postList.body);
+fetchPosts() async {
+  var postList;
+  try{
+    postList = await http.get(properties['Api']['BaseUrl'] + "/posts");
+    return json.decode(postList.body);
+  }catch(e){
+    return -1;
+    
+  }
 }
 
 Future<bool> syncData() async {
@@ -43,9 +54,9 @@ Future<bool> syncData() async {
   return true;
 }
 
-Future<bool> setValue(areaName, actionCommand, previousValue, operation) async {
-  var newValue = operation == "sub" ? previousValue - 1 : previousValue + 1;
-  var url = "api/areas";
+Future<bool> setValue(areaName, actionCommand, previousValue, operation, count) async {
+  var newValue = operation == "sub" ? previousValue - count : previousValue + count;
+  var url = "/areas";
 
   Map body = {
     "county": areaName,
@@ -62,7 +73,7 @@ Future<bool> writePost(String text, id) async {
   var _text = text.replaceAll('"', '""').replaceAll("'", "''");
   DateTime now = DateTime.now();
   var _dato = DateFormat('dd-MM-yyyy').format(now).toString();
-  var url = "api/posts";
+  var url = "/posts";
   Map body = {
     "id": id,
     "comment": _text,

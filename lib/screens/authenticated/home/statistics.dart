@@ -188,20 +188,25 @@ class _StatisticsState extends State<Statistics> with WidgetsBindingObserver {
 
   void fetchSavedData() async {
     var areaList = await getAreaData();
-    for (var area in areaList) {
-      if (area["infected"] != 0) {
-        areas.add(area);
-        totalAreas++;
-        totalInfected += area["infected"];
-        totalDead += area["dead"];
-        totalRecovered += area["recovered"];
+    if(areaList != -1){
+      for (var area in areaList) {
+        if (area["infected"] != 0) {
+          areas.add(area);
+          totalAreas++;
+          totalInfected += area["infected"];
+          totalDead += area["dead"];
+          totalRecovered += area["recovered"];
+        }
       }
+      areas.sort((a, b) =>
+          b["county"].toLowerCase().compareTo(a["county"].toLowerCase()));
+      setState(() {
+        result = true;
+      });
+    }else{
+      fetchSavedData();
     }
-    areas.sort((a, b) =>
-        b["county"].toLowerCase().compareTo(a["county"].toLowerCase()));
-    setState(() {
-      result = true;
-    });
+    
   }
 }
 

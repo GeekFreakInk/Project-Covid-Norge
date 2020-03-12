@@ -17,6 +17,7 @@ class _StartupState extends State<Startup>{
   Widget build(BuildContext context) {
     return SplashScreen(
       seconds: 4,
+      loaderColor: Colors.white,
       backgroundColor: Colors.white,
       image: Image.asset("assets/logo.png"),
       photoSize: 150.0,

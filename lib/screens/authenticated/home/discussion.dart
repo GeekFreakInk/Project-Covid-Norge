@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -21,7 +23,14 @@ TextEditingController _textFieldController = TextEditingController();
     super.initState();
     _fetchPosts();
   }
-  
+
+  @override
+  void setState(fn){
+    if(mounted){
+      super.setState(fn);
+    }
+  }
+ 
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -70,10 +79,8 @@ TextEditingController _textFieldController = TextEditingController();
             SizedBox(height: 5,),
             Container(child: 
               Card(
-              color: Colors.white60,
               shape: Border(left: BorderSide(color: Colors.deepOrangeAccent, width: 3.5)),
-              elevation: 5,
-    
+              elevation: 10,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -99,11 +106,15 @@ TextEditingController _textFieldController = TextEditingController();
     comments = [];
     var commentList = [];
     var fetchedContent = await fetchPosts();
-    for (var i = fetchedContent.length - 1; i > -1; i--){
-     commentList.add(fetchedContent[i]);
+    if(fetchedContent != -1){
+      for (var i = fetchedContent.length - 1; i > -1; i--){
+      commentList.add(fetchedContent[i]);
+      }
+      setState(() {
+        comments = commentList;
+      });
+    }else{     
+      _fetchPosts();
     }
-    setState(() {
-      comments = commentList;
-    });
   }    
 }
