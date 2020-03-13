@@ -1,3 +1,3 @@
 const Map properties = const {
-  "Api": {"BaseUrl": "https://covid-norge.herokuapp.com:5432/api"}
+  "Api": {"BaseUrl": "http://10.0.2.2:5000/api"}
 };
