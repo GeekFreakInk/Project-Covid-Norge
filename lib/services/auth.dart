@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:Covid_Norge/models/user.dart';
 
 class AuthService {
@@ -35,27 +34,6 @@ class AuthService {
           email: email, password: password); // Firebase method
       FirebaseUser user = result.user;
       // turn to regular user
-      return _userFromFirebaseUser(user);
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
-
-  // sign in with Google
-  Future signInWithGoogle() async {
-    try {
-      GoogleSignIn googleSignIn = GoogleSignIn(); // create instance of GoogleSignIn
-
-      GoogleSignInAccount googleAccount = await googleSignIn.signIn();
-      
-      AuthResult result =
-          await _auth.signInWithCredential(GoogleAuthProvider.getCredential(
-        idToken: (await googleAccount.authentication).idToken,
-        accessToken: (await googleAccount.authentication).accessToken,
-      ));
-
-      FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
